@@ -1,10 +1,9 @@
 /*
- * potentiometer1.c
+ * potentiometer.c
  *
- * Created: 08-06-2019 14:57:57
+ * Created: 08-06-2019 14:50:10
  * Author : Madhu
  */ 
-
 #define F_CPU 1000000
 #include <avr/io.h>
 #include <util/delay.h>
@@ -35,14 +34,14 @@ int main(void)
 	_delay_ms(50);
 	ADCSRA|=(1<<ADSC);
 	
-    while (1) 
- 
-    {
+	while (1)
+	
+	{
 		count=ADC/4;
 		send_a_command(0X80+0X40+0);
 		send_a_string("Temp(C)= ");
 		send_a_command(0X80+0X40+8);
-	
+		
 		itoa(count,showa,10);
 		send_a_string(showa);
 		send_a_string("  ");
@@ -74,3 +73,5 @@ void send_a_string(char *string_of_character)
 		send_a_character(*string_of_character++);
 	}
 }
+}
+
